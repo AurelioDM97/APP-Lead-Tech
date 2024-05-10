@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">APP Lead Tech</string>
+    <string name="Inserisci_la_stringa">Inserisci la Stringa\n</string>
+    <string name="clicca_qui">Genera</string>
 </resources>
