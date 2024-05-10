@@ -20,13 +20,25 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.button.setOnClickListener {
-            var str = editText.text.toString()
-            textView.text = str
+            var input  = editText.text.toString().replace("-", "")
+
         }
 
     }
 
+private fun validCode(code: String) {
+    if (code.length != 10) {
 
+
+        var add = 0
+        for (i in 0 until 9) {
+            val inputDigit = code[i].toString().toIntOrNull()
+            add += inputDigit * (10 - i)
+        }
+
+    }
+
+}
 
 
 
