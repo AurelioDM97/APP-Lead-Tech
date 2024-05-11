@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import androidx.lifecycle.lifecycleScope
 import com.example.appleadtech.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun validateCode(input: String) {
+        lifecycleScope.launch()
 
             val isValid = CodeValidation.isValid(input)
             }
