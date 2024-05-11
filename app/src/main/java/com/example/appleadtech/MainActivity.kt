@@ -1,5 +1,6 @@
 package com.example.appleadtech
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -19,27 +20,18 @@ class MainActivity : AppCompatActivity() {
         var textView = binding.textName
 
 
-        binding.button.setOnClickListener {
-            var input  = editText.text.toString().replace("-", "")
+        button.setOnClickListener {
+            val input  = editText.text.toString().replace("-", "")
+            validateCode(input)
 
         }
 
     }
+    private fun validateCode(input: String) {
 
-private fun validCode(code: String) {
-    if (code.length != 10) {
-
-
-        var add = 0
-        for (i in 0 until 9) {
-            val inputDigit = code[i].toString().toIntOrNull()
-            add += inputDigit * (10 - i)
+            val isValid = CodeValidation.isValid(input)
+            }
+            binding.textName.text = if (isValid) "Codice Valido" else "Codice Non Valido"
         }
-
     }
-
-}
-
-
-
 }
