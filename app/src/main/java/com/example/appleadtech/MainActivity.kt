@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import com.example.appleadtech.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,18 +25,21 @@ class MainActivity : AppCompatActivity() {
 
 
         button.setOnClickListener {
-            val input  = editText.text.toString().replace("-", "")
+            val input = editText.text.toString().replace("-", "")
             validateCode(input)
 
         }
-
     }
     private fun validateCode(input: String) {
-        lifecycleScope.launch()
-
-            val isValid = CodeValidation.isValid(input)
+        lifecycleScope.launch() {
+            val isValid = withContext(Dispatchers.Default) {
+                CodeValidation.isValid(input)
             }
-            binding.textName.text = if (isValid) "Codice Valido" else "Codice Non Valido"
+            updateCoroutine(isValid)
         }
     }
+    private fun updateCoroutine(isValid: Boolean) {
+        binding.textName.text = if (isValid) "Codice Valido" else "Codice Non Valido"
+    }
 }
+

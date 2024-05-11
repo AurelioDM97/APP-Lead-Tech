@@ -9,7 +9,16 @@ object CodeValidation {
             val digit = code[i].toString().toIntOrNull() ?: return false
             add += digit * (10 - i)
         }
-
-      return false
+        val lastChar = code[9]
+        val checkSum = when {
+            lastChar == 'X' -> 10
+            else -> lastChar.toString().toIntOrNull() ?: return false
         }
+        add %= 11
+        return if (add == 0) {
+            checkSum == 0
+        } else {
+            11 - add == checkSum
+        }
+    }
 }
